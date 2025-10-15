@@ -28,17 +28,20 @@ The Responsive Dashboard App is a comprehensive React Native application that de
 ## 2. App Screenshots
 
 ### 2.1 Phone Portrait Mode
-![Phone Portrait](screenshots/phone-portrait.png)
+![answer 2025-10-15 at 2 22 57 PM](https://github.com/user-attachments/assets/f378c760-600b-4a53-9f6c-8cb8b10015ff)
+
 
 **Description**: Dashboard displayed on phone in portrait orientation showing single-column layout with optimized spacing and typography for mobile viewing.
 
 ### 2.2 Phone Landscape Mode
-![Phone Landscape](screenshots/phone-landscape.png)
+![answer 2025-10-15 at 2 23 19 PM](https://github.com/user-attachments/assets/4cff9ec1-2e73-47a0-8eba-31d3af9dc205)
+
 
 **Description**: Dashboard in landscape mode on phone, demonstrating automatic column adaptation to 2-column layout for better space utilization.
 
 ### 2.5 Performance Monitor
-![Performance Monitor](screenshots/performance-monitor.png)
+![answer 2025-10-15 at 2 23 32 PM](https://github.com/user-attachments/assets/3c4adba2-b0b4-4b02-97a4-dfd20b210118)
+
 
 **Description**: React Native performance monitor showing consistent 60fps performance during normal interactions and smooth orientation transitions.
 
