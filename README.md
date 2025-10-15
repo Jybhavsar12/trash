@@ -28,7 +28,8 @@ The Contact Manager App is a comprehensive React Native application that demonst
 ## 2. App Screenshots
 
 ### 2.1 Contact List Screen
-![answer 2025-10-15 at 1 07 57 PM](https://github.com/user-attachments/assets/10b22e3d-c8fc-40a3-b307-299369c3fb9b)
+![answer 2025-10-15 at 1 35 46 PM](https://github.com/user-attachments/assets/dcda7f4b-907a-4409-ae75-57d41d555924)
+
 
 
 **Description**: Main screen displaying all contacts with search functionality, favorite indicators, and smooth scrolling performance. Features include:
