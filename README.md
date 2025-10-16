@@ -28,7 +28,7 @@
 
 ---
 
-## B. Redux Implementation Summary (200 words)
+## B. Redux Implementation Summary 
 
 My Redux store is structured using Redux Toolkit's configureStore with a single todos slice. The store configuration in `src/store/index.js` registers the todosReducer under the 'todos' key, creating a clean separation of concerns.
 
@@ -49,7 +49,7 @@ This architecture ensures predictable state management with clear data flow from
 
 ---
 
-## C. Challenges and Learning (150 words)
+## C. Challenges and Learning 
 
 Initially, I encountered a blank screen issue due to missing store configuration. The app wasn't rendering because the store wasn't properly exported from `src/store/index.js`. I debugged this by adding a test component first, then gradually adding Redux functionality.
 
@@ -61,7 +61,7 @@ Key insights gained: Redux provides predictable state management through unidire
 
 ---
 
-## D. Testing and Verification (100 words)
+## D. Testing and Verification 
 
 I tested each Redux action manually through the UI:
 - `addTodo`: Verified new todos appear in the list with correct text and uncompleted status
