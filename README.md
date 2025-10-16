@@ -21,10 +21,10 @@
 *Caption: User adding a new todo item through the input field, demonstrating the addTodo action functionality*
 
 ### 3. Filter Functionality
-![answer 2025-10-16 at 10 49 41 AM](https://github.com/user-attachments/assets/24e3dc84-94bf-4a6c-a705-4bacfd08e059)
-*Caption: App displaying filtered view showing only "Active" todos, demonstrating the setFilter action and state filtering*
 ![answer 2025-10-16 at 10 49 53 AM](https://github.com/user-attachments/assets/c7a60160-7ee9-467e-8b50-e2bb78e7200d)
 *Caption: App displaying filtered view showing only "Active" todos, demonstrating the setFilter action and state filtering*
+![answer 2025-10-16 at 10 49 58 AM](https://github.com/user-attachments/assets/c838b2db-f00e-4a15-9d6c-f6fc1f68d33d)
+*Caption: App displaying filtered view showing only "Completed" todos, demonstrating the setFilter action and state filtering*
 
 ---
 
