@@ -1,239 +1,104 @@
-# Lab Report: Redux Shopping Cart Implementation
+# React Native Navigation Lab Report
 
-## Overview
-This lab involved creating a React Native shopping cart application using Redux for state management. The project included product listing, cart functionality, and navigation between screens.
+  ## A. Screenshots Section
 
-### 1. Product List Screen
-![answer 2025-11-12 at 8 23 35 PM](https://github.com/user-attachments/assets/8ab13bd3-63f4-4c49-8e6d-ede1a664afd4)
-*Figure 1: Main product listing screen showing all available products with "Add to Cart" buttons*
 
-### 2. Product Added to Cart (Button State Change)
-![answer 2025-11-12 at 8 23 42 PM](https://github.com/user-attachments/assets/4bfb45ae-1abd-449c-a2a4-32d06363ce72)
-![answer 2025-11-12 at 8 23 49 PM](https://github.com/user-attachments/assets/bc031dc2-5438-415d-9f70-3f1b5c8488fc)
-*Figure 2: Product card showing button state change from "Add to Cart" to "In Cart (1)" after adding item*
+### Screenshot 1: Home Screen (Stack Navigator)
+![answer 2025-12-03 at 3 16 41 PM](https://github.com/user-attachments/assets/c6e355ab-9c42-4e70-a2e3-10de01448e60)
+*Caption: Main home screen showing the initial stack navigator screen with navigation buttons to Details and Profile screens.*
 
-### 3. Cart Screen with Items
-![answer 2025-11-12 at 8 24 16 PM](https://github.com/user-attachments/assets/0222df7d-19d9-4bd8-b767-ca129b86f761)
-*Figure 3: Shopping cart screen displaying added items with quantities and total price*
+### Screenshot 2: Details Screen with Parameters
+![answer 2025-12-03 at 3 17 12 PM](https://github.com/user-attachments/assets/599590ec-c693-4a74-b9b9-d2e2f78fc843)
+*Caption: Details screen displaying passed parameters (itemId: 42, itemName: "Sample Item") demonstrating parameter passing between screens.*
 
-### 4. Cart with Updated Quantities
-![answer 2025-11-12 at 8 24 26 PM](https://github.com/user-attachments/assets/683b405c-6fa9-4947-a646-59b7e510001e)
+### Screenshot 3: Profile Screen
+![answer 2025-12-03 at 3 17 28 PM](https://github.com/user-attachments/assets/eb30cba3-4f11-4483-b86a-16bd14768df9)
+*Caption: Profile screen accessible from the Home screen, showing stack navigation functionality.*
 
-*Figure 4: Cart screen showing updated quantities after adding multiple items or increasing quantities*
+### Screenshot 4: Search Screen (Tab Navigation)
+![answer 2025-12-03 at 3 16 56 PM](https://github.com/user-attachments/assets/e9987945-3ef3-4397-9333-245dc2ea72df)
+*Caption: Search tab with text input field and live search display, demonstrating tab navigation and state management.*
 
-## Challenges Faced
+### Screenshot 5: Settings Screen (Tab Navigation)
+![answer 2025-12-03 at 3 17 05 PM](https://github.com/user-attachments/assets/66b858d1-a60f-42ff-882d-ba07ec183cd6)
+*Caption: Settings tab with toggle switches for notifications and dark mode, showing interactive components in tab navigation.*
 
-### 1. Asset Resolution Issues
-**Problem**: `Unable to resolve module ../../assets/placeholder.png` error
-- **Root Cause**: Missing placeholder image file in assets directory
-- **Impact**: Prevented app from loading ProductCard components
-- **Error Message**: 
-  ```
-  ERROR Error: Unable to resolve module ../../assets/placeholder.png from 
-  /Users/.../ShoppingCartRedux/src/components/ProductCard.js
-  ```
+## B. Navigation Implementation 
 
-### 2. Metro Configuration Problems
-**Problem**: `missing-asset-registry-path` error in React Navigation assets
-- **Root Cause**: Incomplete Metro bundler configuration for asset handling
-- **Impact**: Navigation components couldn't load their icon assets
-- **Error Message**:
-  ```
-  Error: Unable to resolve module missing-asset-registry-path from 
-  .../node_modules/@react-navigation/elements/lib/module/assets/back-icon.png
-  ```
+The navigation structure follows a hierarchical approach with `NavigationContainer` as the root wrapper. The main navigation is handled by `TabNavigator` using `createBottomTabNavigator()`, which provides three tabs: Home, Search, and Settings.
 
-### 3. Runtime Invariant Violations
-**Problem**: "Runtime not ready" errors during app initialization
-- **Root Cause**: Circular imports and improper module loading sequence
-- **Impact**: App crashed on startup before reaching Redux components
+The Stack Navigator is nested within the Home tab using `createStackNavigator()`, containing three screens: Home, Details, and Profile. This nested structure allows for complex navigation patterns where users can navigate through a stack of screens within a specific tab context.
 
-### 4. Native Module Registration
-**Problem**: "Verify that a module by this name is registered in native binary"
-- **Root Cause**: React Navigation native dependencies not properly linked
-- **Impact**: Navigation functionality completely broken
+Configuration includes custom styling with `tabBarActiveTintColor: '#3498db'` for active tabs and `headerStyle` with blue background for stack screens. The `headerShown: false` option in TabNavigator prevents duplicate headers.
 
-### 5. White Screen Issue
-**Problem**: App loaded but showed blank white screen
-- **Root Cause**: Missing Stack Navigator configuration in App.js
-- **Impact**: No UI components rendered despite Redux store working
+Parameter passing is implemented using the `navigation.navigate()` method with a second parameter object. For example: `navigation.navigate('Details', {itemId: 42, itemName: 'Sample Item'})`. The receiving screen accesses parameters through `route.params` in the options function or component props.
 
-## Solutions Implemented
+The TabNavigator uses `screenOptions` for consistent styling across tabs, while individual screens can override these with their own `options` prop. This structure provides both tab-based navigation for main sections and stack-based navigation for detailed workflows within each section.
 
-### 1. Asset Resolution Fix
-```javascript
-// Temporary solution: Removed defaultSource prop
-<Image 
-  source={{ uri: product.image }} 
-  style={styles.image} 
-/>
+## C. Challenges and Learning (150 words)
+
+The primary challenge was understanding the nested navigation structure and how TabNavigator and StackNavigator interact. Initially, I struggled with header duplication when both navigators tried to render headers simultaneously, resolved by setting `headerShown: false` in TabNavigator.
+
+Parameter passing required understanding the difference between navigation props and route props. Debugging was accomplished using React Native Debugger and console.log statements to verify parameter values.
+
+The most confusing concept was the navigation prop availability across different navigator types. I learned that each screen receives navigation props automatically, but the available methods depend on the parent navigator type.
+
+TypeScript integration posed additional challenges with proper typing for navigation and route parameters. I solved implementation problems by carefully reading React Navigation documentation and testing each navigation method individually.
+
+Screen options configuration was initially confusing, particularly the difference between static options and dynamic options functions that receive navigation and route parameters.
+
+## D. Testing and Verification (100 words)
+
+For Stack Navigator testing, I verified forward and backward navigation between Home, Details, and Profile screens. I tested the hardware back button behavior and gesture navigation on both platforms.
+
+Tab Navigator testing included switching between all three tabs and ensuring state preservation when returning to previously visited tabs. I verified that the nested stack navigator maintained its state within the Home tab.
+
+Parameter passing was tested by navigating to Details screen with different parameter values and confirming they displayed correctly. I used console.log statements to verify parameter reception.
+
+Navigation flow testing involved complex scenarios like navigating deep into the stack, switching tabs, and returning to verify proper state management and navigation history preservation.
+
+## Navigation Flow Diagram
+
 ```
-**Long-term solution**: Create `assets/` directory and add placeholder.png
-
-### 2. Metro Configuration Update
-```javascript
-// Updated metro.config.js
-const {getDefaultConfig, mergeConfig} = require('@react-native/metro-config');
-const defaultConfig = getDefaultConfig(__dirname);
-
-const config = {
-  resolver: {
-    assetExts: defaultConfig.resolver.assetExts.filter(ext => ext !== 'svg'),
-    sourceExts: [...defaultConfig.resolver.sourceExts, 'svg'],
-  },
-};
-
-module.exports = mergeConfig(defaultConfig, config);
+NavigationContainer (Root)
+│
+└── TabNavigator
+    ├── HomeStack Tab
+    │   └── StackNavigator
+    │       ├── HomeScreen
+    │       ├── DetailsScreen
+    │       └── ProfileScreen
+    │
+    ├── Search Tab
+    │   └── SearchScreen
+    │
+    └── Settings Tab
+        └── SettingsScreen
 ```
 
-### 3. Runtime Issues Resolution
-```bash
-# Clear Metro cache and restart
-npx react-native start --reset-cache
-rm -rf /tmp/metro-*
-rm -rf node_modules/.cache
+### Component Hierarchy:
+- **NavigationContainer**: Root navigation wrapper
+- **TabNavigator**: Bottom tab navigation with 3 tabs
+- **StackNavigator**: Nested in Home tab, manages screen stack
+- **Screen Components**: Individual screens with navigation capabilities
 
-# Full clean when needed
-rm -rf node_modules
-npm install
-```
+### Navigation Methods Used:
+- `navigation.navigate()` - Navigate to specific screen
+- `navigation.goBack()` - Return to previous screen
+- Tab switching through TabNavigator UI
+- Parameter passing via navigation options
 
-### 4. Native Module Linking
-```bash
-# Reinstall and link navigation dependencies
-npm install @react-navigation/native @react-navigation/stack
-npm install react-native-screens react-native-safe-area-context
-cd ios && pod install && cd ..
-```
+## Code Structure Summary
 
-### 5. Complete App.js Setup
-```javascript
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
-import { Provider } from 'react-redux';
-import CartScreen from './src/screens/CartScreen';
-import ProductListScreen from './src/screens/ProductListScreen';
-import { store } from './src/store';
+### Key Files:
+- `App.tsx` - Root component with NavigationContainer
+- `TabNavigator.js` - Bottom tab navigation setup
+- `StackNavigator.js` - Stack navigation for Home tab
+- Screen components in `src/screens/` directory
 
-const Stack = createStackNavigator();
-
-export default function App() {
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Products"
-          screenOptions={{
-            headerStyle: { backgroundColor: '#3498db' },
-            headerTintColor: '#fff',
-            headerTitleStyle: { fontWeight: 'bold' },
-          }}
-        >
-          <Stack.Screen
-            name="Products"
-            component={ProductListScreen}
-            options={{ title: 'Shop' }}
-          />
-          <Stack.Screen
-            name="Cart"
-            component={CartScreen}
-            options={{ title: 'Shopping Cart' }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-  );
-}
-```
-
-## What I Learned About Redux
-
-### 1. Store Architecture
-- **Redux Toolkit Benefits**: `configureStore()` simplifies store setup compared to traditional Redux
-- **Slice Pattern**: Using `createSlice()` combines actions, action creators, and reducers
-- **State Structure**: Organized state into logical domains (products, cart)
-- **Middleware Integration**: Built-in middleware for async actions and dev tools
-
-### 2. State Management Patterns
-
-#### Immutable Updates
-```javascript
-// Redux Toolkit uses Immer internally, allowing "mutative" syntax
-addToCart: (state, action) => {
-  const existingItem = state.items.find(item => item.id === action.payload.id);
-  if (existingItem) {
-    existingItem.quantity += 1;
-  } else {
-    state.items.push({ ...action.payload, quantity: 1 });
-  }
-}
-```
-
-#### Async Thunks
-```javascript
-// Handling async operations with createAsyncThunk
-export const fetchProducts = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const response = await fetchProductsAPI();
-    return response;
-  }
-);
-```
-
-### 3. Component Integration
-- **useSelector Hook**: Accessing state in components
-- **useDispatch Hook**: Dispatching actions from components
-- **Provider Pattern**: Wrapping app with Redux Provider for state access
-
-### 4. Debugging and Development
-- **Redux DevTools**: Essential for tracking state changes and actions
-- **Action Logging**: Understanding the flow of data through the application
-- **Error Handling**: Proper error states in async thunks
-
-### 5. Integration Challenges
-- **React Native Specifics**: Metro bundler configuration affects Redux setup
-- **Navigation Integration**: Redux state must work with React Navigation
-- **TypeScript vs JavaScript**: Mixing type definitions caused runtime errors
-
-## Key Takeaways
-
-### Technical Insights
-1. **Redux Toolkit** significantly reduces boilerplate compared to traditional Redux
-2. **Proper project structure** is crucial for maintainable Redux applications
-3. **Metro configuration** affects how modules are resolved and bundled
-4. **Native dependencies** require proper linking in React Native projects
-
-### Development Process
-1. **Systematic debugging** is essential when multiple systems interact
-2. **Clean builds** often resolve mysterious runtime errors
-3. **Documentation reading** is crucial for understanding error messages
-4. **Incremental testing** helps isolate issues in complex setups
-
-### Best Practices Learned
-- Keep reducers pure and predictable
-- Use meaningful action names and types
-- Structure state logically and avoid deep nesting
-- Handle loading and error states consistently
-- Separate API logic from Redux logic
-- Always wrap the app with Provider at the root level
-
-## Conclusion
-This lab provided hands-on experience with Redux in a React Native environment. While Redux offers powerful state management capabilities, it requires careful setup and understanding of the React Native ecosystem. The debugging process taught valuable lessons about module resolution, native dependencies, and the importance of proper configuration in mobile development.
-
-The final application successfully demonstrates Redux concepts including:
-- Centralized state management
-- Async data fetching
-- Component-to-store communication
-- Navigation integration
-- Error handling and loading states
-
----
-
-**Note**: To include actual screenshots, create a `screenshots/` folder in your project directory and add the following images:
-- `product-list.png` - Product listing screen
-- `product-added.png` - Product with "In Cart" button state
-- `cart-screen.png` - Cart screen with items
-- `cart-updated.png` - Cart with multiple quantities
-
+### Dependencies:
+- `@react-navigation/native`
+- `@react-navigation/bottom-tabs`
+- `@react-navigation/stack`
+- `react-native-gesture-handler`
+- `react-native-screens`
