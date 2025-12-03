@@ -35,7 +35,7 @@ Parameter passing is implemented using the `navigation.navigate()` method with a
 
 The TabNavigator uses `screenOptions` for consistent styling across tabs, while individual screens can override these with their own `options` prop. This structure provides both tab-based navigation for main sections and stack-based navigation for detailed workflows within each section.
 
-## C. Challenges and Learning (150 words)
+## C. Challenges and Learning 
 
 The primary challenge was understanding the nested navigation structure and how TabNavigator and StackNavigator interact. Initially, I struggled with header duplication when both navigators tried to render headers simultaneously, resolved by setting `headerShown: false` in TabNavigator.
 
@@ -47,7 +47,7 @@ TypeScript integration posed additional challenges with proper typing for naviga
 
 Screen options configuration was initially confusing, particularly the difference between static options and dynamic options functions that receive navigation and route parameters.
 
-## D. Testing and Verification (100 words)
+## D. Testing and Verification 
 
 For Stack Navigator testing, I verified forward and backward navigation between Home, Details, and Profile screens. I tested the hardware back button behavior and gesture navigation on both platforms.
 
